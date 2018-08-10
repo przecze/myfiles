@@ -1,0 +1,19 @@
+#autocompletion customization
+bind 'TAB':menu-complete
+bind "set show-all-if-ambiguous on"
+bind "set menu-complete-display-prefix on"
+
+#some aliases
+alias get='sudo apt install'
+alias st='git status'
+alias lg='git log --oneline --abbrev-commit --all --graph --decorate --color'
+alias ..1='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+alias ..4='cd ../../../..'
+
+#the fuck.
+eval $(thefuck --alias fk)
+
+export PS1="\[\033[33;1m\]\w\[\033[m\]:\[\033[1;32m\]\$(git branch 2>/dev/null | grep '^*' | colrm 1 2)\[\033[m\]\$ "
+
