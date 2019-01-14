@@ -3,45 +3,49 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+if !isdirectory("~/.vim/bundle/Vundle.vim")
+  call vundle#begin()
+  " alternatively, pass a path where Vundle should install plugins
+  "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'derekwyatt/vim-fswitch'
-Plugin 'aitjcize/cppman'
-Plugin 'AndrewRadev/linediff.vim'
-Plugin 'lyuts/vim-rtags'
-Plugin 'smitajit/bufutils.vim'
+  " let Vundle manage Vundle, required
+  Plugin 'VundleVim/Vundle.vim'
+  Plugin 'Valloric/YouCompleteMe'
+  Plugin 'derekwyatt/vim-fswitch'
+  Plugin 'aitjcize/cppman'
+  Plugin 'AndrewRadev/linediff.vim'
+  Plugin 'lyuts/vim-rtags'
+  Plugin 'smitajit/bufutils.vim'
 
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-let mapleader=","
-let g:ycm_collect_idientifiers_from_tags_files=1
-let g:ycm_confirm_extra_conf=0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>gt :YcmCompleter GetType<CR>
-nnoremap <leader>A  :FSHere<CR>
-nnoremap qq :call bufutils#BClosePreviews()<CR>
-command!  A FSHere
+  " All of your Plugins must be added before the following line
+  call vundle#end()            " required
+  filetype plugin indent on    " required
+  " To ignore plugin indent changes, instead use:
+  "filetype plugin on
+  "
+  " Brief help
+  " :PluginList       - lists configured plugins
+  " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+  " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+  " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+  "
+  " see :h vundle for more details or wiki for FAQ
+  " Put your non-Plugin stuff after this line
+  let mapleader=","
+  let g:ycm_collect_idientifiers_from_tags_files=1
+  let g:ycm_confirm_extra_conf=0
+  let g:ycm_autoclose_preview_window_after_insertion = 1
+  nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+  nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+  nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+  nnoremap <leader>gt :YcmCompleter GetType<CR>
+  nnoremap <leader>A  :FSHere<CR>
+  nnoremap qq :call bufutils#BClosePreviews()<CR>
+  command!  A FSHere
+else
+  echom "Vundle not installed"
+endif
 autocmd FileType cpp set keywordprg=cppman
 
 set expandtab
@@ -60,3 +64,12 @@ set shiftwidth=2
 imap jj <ESC>
 nmap <F8> :tabp<CR>
 nmap <F9> :tabn<CR>
+
+command! W w
+command! Wa wa
+command! WA wa
+command! Wqa wqa
+command! WQa wqa
+command! WQA wqa
+command! Q q
+
