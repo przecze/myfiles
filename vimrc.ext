@@ -16,7 +16,9 @@ if !isdirectory("~/.vim/bundle/Vundle.vim")
   Plugin 'AndrewRadev/linediff.vim'
   Plugin 'lyuts/vim-rtags'
   Plugin 'smitajit/bufutils.vim'
-
+  Plugin 'pboettch/vim-highlight-cursor-words'
+  Plugin 'easymotion/vim-easymotion'
+  Plugin 'ctrlpvim/ctrlp.vim'
 
   " All of your Plugins must be added before the following line
   call vundle#end()            " required
@@ -36,6 +38,7 @@ if !isdirectory("~/.vim/bundle/Vundle.vim")
   let g:ycm_collect_idientifiers_from_tags_files=1
   let g:ycm_confirm_extra_conf=0
   let g:ycm_autoclose_preview_window_after_insertion = 1
+  let g:ycm_always_populate_location_list = 1
   nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
   nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
   nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -43,16 +46,41 @@ if !isdirectory("~/.vim/bundle/Vundle.vim")
   nnoremap <leader>A  :FSHere<CR>
   nnoremap qq :call bufutils#BClosePreviews()<CR>
   command!  A FSHere
+
+  let g:EasyMotion_smartcase = 1
+  " <Leader>f{char} to move to {char}
+  map  <Leader>f <Plug>(easymotion-bd-f)
+  nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+  " s{char}{char} to move to {char}{char}
+  nmap s <Plug>(easymotion-overwin-f2)
+
+  " Move to line
+  map gl <Plug>(easymotion-bd-jk)
+  nmap gl <Plug>(easymotion-overwin-line)
+
+  " Move to word
+  map  <Leader>w <Plug>(easymotion-bd-w)
+  nmap <Leader>w <Plug>(easymotion-overwin-w)
 else
   echom "Vundle not installed"
 endif
 autocmd FileType cpp set keywordprg=cppman
+packadd termdebug
+hi debugPC term=reverse ctermbg=DarkCyan
+
+syntax on
 
 set expandtab
 set tabstop=2
 set shiftwidth=2
 set smartindent
 set showcmd
+set mouse=a
+set clipboard=unnamedplus
+set incsearch
+set smartcase
+set bs=2
 "ctags
 set tags=tags;/
 
@@ -64,6 +92,9 @@ set shiftwidth=2
 imap jj <ESC>
 nmap <F8> :tabp<CR>
 nmap <F9> :tabn<CR>
+nmap ; :
+nmap <Leader>. :Explore<CR>
+nmap <Space> <CR>
 
 command! W w
 command! Wa wa
